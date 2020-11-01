@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextInput">
+        <item name="android:fontFamily">@font/opensans_semibold</item>
+        <item name="android:textSize">@dimen/txt_size_normal</item>
+        <item name="android:textColor">@color/text_dark</item>
+    </style>
+
+    <style name="TextInput.Hint">
+        <item name="android:textColor">@color/text_semi_dark</item>
+    </style>
+
+    <style name="TextInput.Main">
+        <item name="android:textColor">@color/text_dark</item>
+    </style>
+
+    <style name="TextInput.Clickable">
+        <item name="android:textColor">@color/primary_dark_orange</item>
+    </style>
+
+    <style name="ToolBarText">
+        <item name="android:fontFamily">@font/opensans_semibold</item>
+        <item name="android:textSize">@dimen/txt_size_huge</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextThin">
+        <item name="android:fontFamily">@font/opensans_regular</item>
+        <item name="android:textSize">@dimen/txt_size_normal</item>
+        <item name="android:textColor">@color/text_semi_dark</item>
+    </style>
+
+</resources>

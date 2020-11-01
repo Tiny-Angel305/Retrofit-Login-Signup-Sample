@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Psychic Contact</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="new_user">New user?</string>
+    <string name="sign_up">Signup</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="login">Login</string>
+    <string name="no_network_error">No internet connection</string>
+    <string name="hint_gender">Gender</string>
+    <string name="hint_last_name">Last Name</string>
+    <string name="hint_first_name">First Name</string>
+    <string name="hint_retype_pass">Re-Type Password</string>
+    <string name="hint_username">Username</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="hint_country">Country</string>
+    <string name="hint_dob">Date of Birth</string>
+    <string name="newsletter">Newsletter</string>
+    <string name="terms">Terms</string>
+    <string name="agreed">I have read and agreed to all the Member</string>
+    <string name="termsAndConditions">Terms and Conditions</string>
+    <string name="register">Register</string>
+    <string name="lb_registration">Registration</string>
+    <string name="lb_forgot_pass">Forgot Password</string>
+    <string name="lb_home">Home</string>
+</resources>

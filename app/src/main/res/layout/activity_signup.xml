@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.SignupActivity">
+
+    <include
+        android:id="@+id/top"
+        layout="@layout/tool_bar_layout"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top">
+
+        <LinearLayout
+            android:id="@+id/fields_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/logo_container"
+            app:layout_constraintVertical_weight="6">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="@string/hint_email"
+                app:hintTextAppearance="@style/TextInput.Hint"
+                app:startIconDrawable="@drawable/ic_leading_email">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:inputType="textEmailAddress|textNoSuggestions"
+                    android:textAppearance="@style/TextInput.Main" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/hint_username"
+                app:hintTextAppearance="@style/TextInput.Hint"
+                app:startIconDrawable="@drawable/ic_leading_username">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:inputType="text|textNoSuggestions"
+                    android:textAppearance="@style/TextInput.Main" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/hint_password"
+                app:hintTextAppearance="@style/TextInput.Hint"
+                app:startIconDrawable="@drawable/ic_leading_password">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:inputType="textPassword|textNoSuggestions"
+                    android:textAppearance="@style/TextInput.Main" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/hint_retype_pass"
+                app:hintTextAppearance="@style/TextInput.Hint"
+                app:startIconDrawable="@drawable/ic_leading_password">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_retype_pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:inputType="textPassword|textNoSuggestions"
+                    android:textAppearance="@style/TextInput.Main" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/hint_first_name"
+                app:hintTextAppearance="@style/TextInput.Hint"
+                app:startIconDrawable="@drawable/ic_leading_username">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_first_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:inputType="textPersonName|textNoSuggestions"
+                    android:textAppearance="@style/TextInput.Main" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/hint_last_name"
+                app:hintTextAppearance="@style/TextInput.Hint"
+                app:startIconDrawable="@drawable/ic_leading_username">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_last_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:inputType="textPersonName|textNoSuggestions"
+                    android:textAppearance="@style/TextInput.Main" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_gender_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/hint_gender"
+                app:endIconCheckable="true"
+                app:endIconDrawable="@drawable/ic_ending_check"
+                app:endIconMode="custom"
+                app:hintTextAppearance="@style/TextInput.Hint"
+                app:startIconDrawable="@drawable/ic_leading_gender">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:inputType="text|textNoSuggestions"
+                    android:textAppearance="@style/TextInput.Main" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/hint_dob"
+                app:hintTextAppearance="@style/TextInput.Hint"
+                app:startIconDrawable="@drawable/ic_leading_dob">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_dob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:inputType="text|textNoSuggestions"
+                    android:textAppearance="@style/TextInput.Main" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/hint_country"
+                app:hintTextAppearance="@style/TextInput.Hint"
+                app:startIconDrawable="@drawable/ic_leading_country">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_country"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:inputType="text|textNoSuggestions"
+                    android:textAppearance="@style/TextInput.Main" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/ic_newsletter" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/newsletter"
+                    android:textAppearance="@style/TextInput.Hint" />
+
+                <CheckBox
+                    android:id="@+id/chk_newsletter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/ic_newsletter" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/terms"
+                    android:textAppearance="@style/TextInput.Hint" />
+
+                <CheckBox
+                    android:id="@+id/chk_terms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp">
+
+                <TextView
+                    android:id="@+id/tv_agreed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/agreed"
+                    android:textAppearance="@style/TextThin"
+                    android:textColor="@color/text_semi_dark" />
+
+                <TextView
+                    android:id="@+id/tv_terms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_agreed"
+                    android:layout_centerHorizontal="true"
+                    android:background="?attr/selectableItemBackground"
+                    android:text="@string/termsAndConditions"
+                    android:textAppearance="@style/TextInput.Clickable" />
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/primary_gradient"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="@string/register"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextInput"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
