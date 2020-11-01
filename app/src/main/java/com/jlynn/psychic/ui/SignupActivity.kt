@@ -1,20 +1,18 @@
 package com.jlynn.psychic.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
+import android.widget.RelativeLayout
 import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import com.jlynn.psychic.R
 import com.jlynn.psychic.api.ApiInterface
 import com.jlynn.psychic.api.RetrofitInstance
-import com.jlynn.psychic.api.model.LoginResponse
 import com.jlynn.psychic.api.model.RegisterRequest
-import com.jlynn.psychic.storage.SharedPrefManager
 import kotlinx.android.synthetic.main.activity_signup.*
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -28,6 +26,18 @@ class SignupActivity : BaseActivity(), View.OnClickListener {
 
     override fun getLayoutId(): Int {
         return R.layout.activity_signup
+    }
+
+    override fun getTitleGravity(): Int {
+        return RelativeLayout.CENTER_IN_PARENT
+    }
+
+    override fun isMenuVisible(): Boolean {
+        return true
+    }
+
+    override fun onMenuClicked() {
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

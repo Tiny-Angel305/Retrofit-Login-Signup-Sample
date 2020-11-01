@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toDrawable
 import com.jlynn.psychic.R
@@ -17,11 +18,23 @@ abstract class BaseActivity : AppCompatActivity() {
 
     protected abstract fun getLayoutId(): Int
 
+    protected abstract fun getTitleGravity(): Int
+
+    abstract fun isMenuVisible(): Boolean
+
+    protected abstract fun onMenuClicked()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutId())
 
-        setSupportActionBar(tool_bar)
+        val lp: RelativeLayout.LayoutParams =
+            toolbar_title.layoutParams as RelativeLayout.LayoutParams
+        lp.addRule(getTitleGravity())
+        toolbar_title.layoutParams = lp
+
+//        setSupportActionBar(tool_bar)
 
         if (TextUtils.isEmpty(title))
             toolbar_title.setText(R.string.app_name)
@@ -30,8 +43,10 @@ abstract class BaseActivity : AppCompatActivity() {
 
 //        supportActionBar!!.setDisplayShowTitleEnabled(false)
 
-        iv_left?.setOnClickListener { v: View? -> onBackPressed() }
-
+        if (isMenuVisible()) {
+            iv_right.visibility = View.VISIBLE
+            iv_right.setOnClickListener { onMenuClicked() }
+        }
     }
 
     protected fun hideProgress() {

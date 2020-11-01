@@ -6,6 +6,14 @@ plugins {
 
 apply plugin: 'kotlin-kapt'
 
+Properties keystore = new Properties()
+try {
+    keystore.load(project.rootProject.file('keystore.properties').newDataInputStream())
+} catch (Exception e) {
+    throw new IllegalStateException("Cannot open keystore.properties: " + e + ". " +
+            "Hint: consider renaming keystore.properties.example to keystore.properties")
+}
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.1"
@@ -20,10 +28,22 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        release {
+            storeFile     file(keystore.getProperty('release.file'))
+            storePassword keystore.getProperty('release.store.password')
+            keyAlias      keystore.getProperty('release.key.alias')
+            keyPassword   keystore.getProperty('release.key.password')
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
