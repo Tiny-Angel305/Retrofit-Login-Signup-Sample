@@ -1,6 +1,7 @@
 package com.jlynn.psychic.ui
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.widget.RelativeLayout
 import android.widget.Toast
@@ -31,7 +32,7 @@ class HomeActivity : BaseActivity() {
     }
 
     override fun onMenuClicked() {
-
+        startActivity(Intent(this, MenuActivity::class.java))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

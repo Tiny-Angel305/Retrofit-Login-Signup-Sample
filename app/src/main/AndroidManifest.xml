@@ -36,6 +36,10 @@
             android:name=".ui.HomeActivity"
             android:label="@string/lb_home"
             android:theme="@style/Theme.PsychicContact.Main" />
+        <activity
+            android:name=".ui.MenuActivity"
+            android:label=" "
+            android:theme="@style/Theme.PsychicContact.Menu" />
     </application>
 
 </manifest>

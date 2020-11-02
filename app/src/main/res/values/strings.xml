@@ -24,4 +24,6 @@
     <string name="lb_registration">Registration</string>
     <string name="lb_forgot_pass">Forgot Password</string>
     <string name="lb_home">Home</string>
+    <string name="logout">Logout</string>
+    <string name="contact_email">PsychicContact@2020</string>
 </resources>

@@ -12,21 +12,23 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 
     <style name="Theme.PsychicContact.Splash">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
-        <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@color/white</item>
     </style>
 
     <style name="Theme.PsychicContact.Main">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@drawable/primary_gradient</item>
+    </style>
+
+    <style name="Theme.PsychicContact.Menu">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowBackground">@drawable/secondary_gradient</item>
     </style>
 </resources>
