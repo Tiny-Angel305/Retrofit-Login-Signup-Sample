@@ -219,7 +219,6 @@
                     android:textAppearance="@style/TextInput.Hint" />
 
                 <CheckBox
-                    android:id="@+id/chk_newsletter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp" />
@@ -246,7 +245,6 @@
                     android:textAppearance="@style/TextInput.Hint" />
 
                 <CheckBox
-                    android:id="@+id/chk_terms"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp" />
@@ -267,7 +265,6 @@
                     android:textColor="@color/text_semi_dark" />
 
                 <TextView
-                    android:id="@+id/tv_terms"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_agreed"

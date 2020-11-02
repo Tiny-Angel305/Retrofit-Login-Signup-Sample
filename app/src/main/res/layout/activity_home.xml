@@ -28,7 +28,6 @@
             android:paddingTop="34dp">
 
             <ImageView
-                android:id="@+id/iv_our_readers"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginStart="10dp"
@@ -38,7 +37,6 @@
                 android:src="@drawable/our_readers" />
 
             <ImageView
-                android:id="@+id/iv_category"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginTop="30dp"
@@ -48,7 +46,6 @@
                 android:src="@drawable/category" />
 
             <ImageView
-                android:id="@+id/iv_latest_post"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginStart="-38dp"

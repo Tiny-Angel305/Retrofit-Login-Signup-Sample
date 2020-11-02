@@ -6,14 +6,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="primary_dark_brown">#311619</color>
     <color name="primary_dark_orange">#DD503F</color>
     <color name="primary_dark_yellow">#F0AA18</color>
     <color name="primary_dark_purple">#743D74</color>
-    <color name="primary_light_purple">#B87EBB</color>
 
     <color name="text_dark">#1F2833</color>
     <color name="text_semi_dark">#747474</color>
-    <color name="text_semi_light">#A9A9B0</color>
-    <color name="text_light">#D4D4D4</color>
 </resources>
