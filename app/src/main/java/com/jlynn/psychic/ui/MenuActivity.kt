@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.RelativeLayout
 import androidx.core.text.HtmlCompat
 import com.jlynn.psychic.R
 import com.jlynn.psychic.storage.SharedPrefManager
@@ -34,7 +35,6 @@ class MenuActivity : BaseActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_menu)
 
         val suggestionText = "<b>" + "Questions about Love,\nRelations, Money?" + "</b>" +
                 "\nCall our Psychics " + "<b>" + "24/7 1-888-573-9239" + "</b>" +
@@ -55,7 +55,9 @@ class MenuActivity : BaseActivity(), View.OnClickListener {
         val id: Int = p0!!.id
         when (id) {
             R.id.menu_btn_home -> {
-                finish()
+                val intent = Intent(this, HomeActivity::class.java)
+                startActivity(intent)
+                finishAffinity()
             }
             R.id.menu_btn_register -> {
                 val intent = Intent(this, SignupActivity::class.java)

@@ -1,5 +1,6 @@
 package com.jlynn.psychic.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -14,6 +15,8 @@ import com.jlynn.psychic.api.ApiInterface
 import com.jlynn.psychic.api.RetrofitInstance
 import com.jlynn.psychic.api.model.RegisterRequest
 import kotlinx.android.synthetic.main.activity_signup.*
+import kotlinx.android.synthetic.main.gender_popup_layout.*
+import kotlinx.android.synthetic.main.gender_popup_layout.view.*
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -36,8 +39,12 @@ class SignupActivity : BaseActivity(), View.OnClickListener {
         return true
     }
 
-    override fun onMenuClicked() {
+    override fun getMenuDrawable(): Int {
+        return R.drawable.ic_menu
+    }
 
+    override fun onMenuClicked() {
+        startActivity(Intent(this, MenuActivity::class.java))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,13 +52,22 @@ class SignupActivity : BaseActivity(), View.OnClickListener {
 
         val inflater: LayoutInflater = getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val customView: View = inflater.inflate(R.layout.gender_popup_layout, null)
-        mGenderPopup = PopupWindow(
-                customView,
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-        )
 
+        mGenderPopup = PopupWindow(this@SignupActivity)
+        mGenderPopup.contentView = customView
+        mGenderPopup.isFocusable = true
+        mGenderPopup.width = ViewGroup.LayoutParams.WRAP_CONTENT
+        mGenderPopup.height = ViewGroup.LayoutParams.WRAP_CONTENT
         mGenderPopup.isOutsideTouchable = true
+
+        customView.tv_male.setOnClickListener {
+            input_gender.setText("Male")
+            mGenderPopup.dismiss()
+        }
+        customView.tv_female.setOnClickListener {
+            input_gender.setText("Female")
+            mGenderPopup.dismiss()
+        }
 
         input_gender.isEnabled = false
 
@@ -61,19 +77,12 @@ class SignupActivity : BaseActivity(), View.OnClickListener {
             else {
 
                 mGenderPopup.showAsDropDown(
-                        input_gender,
-                        (-250f * resources.displayMetrics.density / 3.0f).toInt(),
-                        (-30 * resources.displayMetrics.density / 3.0f).toInt(),
-                        Gravity.END
+                    input_gender,
+                    (-250f * resources.displayMetrics.density / 3.0f).toInt(),
+                    (-30 * resources.displayMetrics.density / 3.0f).toInt(),
+                    Gravity.END
                 )
-                /*tv_male.setOnClickListener {
-                    input_gender.setText(tv_male.text)
-                    mGenderPopup.dismiss()
-                }
-                tv_female.setOnClickListener {
-                    input_gender.setText(tv_female.text)
-                    mGenderPopup.dismiss()
-                }*/
+
             }
         }
 
@@ -81,33 +90,35 @@ class SignupActivity : BaseActivity(), View.OnClickListener {
 
         btn_register.setOnClickListener {
             signup(
-                    email = input_email.text.toString(),
-                    username = input_username.text.toString(),
-                    passwd = input_password.text.toString(),
-                    passwdConfirmation = input_retype_pass.text.toString(),
-                    firstName = input_first_name.text.toString(),
-                    lastName = input_last_name.text.toString(),
-                    gender = input_gender.text.toString(),
-                    dob = input_dob.text.toString(),
-                    country = input_country.text.toString()
+                email = input_email.text.toString(),
+                username = input_username.text.toString(),
+                passwd = input_password.text.toString(),
+                passwdConfirmation = input_retype_pass.text.toString(),
+                firstName = input_first_name.text.toString(),
+                lastName = input_last_name.text.toString(),
+                gender = input_gender.text.toString(),
+                dob = input_dob.text.toString(),
+                country = input_country.text.toString()
             )
         }
     }
 
     private fun signup(
-            email: String,
-            username: String,
-            passwd: String,
-            passwdConfirmation: String,
-            firstName: String,
-            lastName: String,
-            gender: String,
-            dob: String,
-            country: String
+        email: String,
+        username: String,
+        passwd: String,
+        passwdConfirmation: String,
+        firstName: String,
+        lastName: String,
+        gender: String,
+        dob: String,
+        country: String
     ) {
-        val retrofitInstance = RetrofitInstance.getRetrofitInstance().create(ApiInterface::class.java)
+        val retrofitInstance =
+            RetrofitInstance.getRetrofitInstance().create(ApiInterface::class.java)
 
-        retrofitInstance.registerUser(RegisterRequest(
+        retrofitInstance.registerUser(
+            RegisterRequest(
                 email,
                 username,
                 passwd,
@@ -117,24 +128,29 @@ class SignupActivity : BaseActivity(), View.OnClickListener {
                 gender,
                 dob,
                 country
-        )).enqueue(object : Callback<ResponseBody> {
+            )
+        ).enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Snackbar.make(
-                        fields_container,
-                        t.message.toString(),
-                        Snackbar.LENGTH_SHORT
+                    fields_container,
+                    t.message.toString(),
+                    Snackbar.LENGTH_SHORT
                 ).show()
             }
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 if (response.code() == 201) {
-                    Toast.makeText(this@SignupActivity, "Registration success! Please log in with your credential.", Toast.LENGTH_SHORT)
-                            .show()
+                    Toast.makeText(
+                        this@SignupActivity,
+                        "Registration success! Please log in with your credential.",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
 
                     finish()
                 } else {
                     Snackbar.make(fields_container, "Registration failed!", Snackbar.LENGTH_SHORT)
-                            .show()
+                        .show()
                 }
             }
         })

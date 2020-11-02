@@ -31,6 +31,10 @@ class HomeActivity : BaseActivity() {
         return true
     }
 
+    override fun getMenuDrawable(): Int {
+        return R.drawable.ic_menu
+    }
+
     override fun onMenuClicked() {
         startActivity(Intent(this, MenuActivity::class.java))
     }

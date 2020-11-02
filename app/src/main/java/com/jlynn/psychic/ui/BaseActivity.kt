@@ -16,9 +16,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     protected abstract fun isMenuVisible(): Boolean
 
-    protected open fun getMenuDrawable(): Int {
-        return R.drawable.ic_menu
-    }
+    protected abstract fun getMenuDrawable(): Int
 
     protected abstract fun onMenuClicked()
 

@@ -16,6 +16,10 @@ class ForgotPasswordActivity : BaseActivity() {
         return false
     }
 
+    override fun getMenuDrawable(): Int {
+        return 0
+    }
+
     override fun onMenuClicked() {
 
     }
