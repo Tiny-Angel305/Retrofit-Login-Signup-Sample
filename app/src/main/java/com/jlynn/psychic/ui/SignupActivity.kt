@@ -15,7 +15,6 @@ import com.jlynn.psychic.api.ApiInterface
 import com.jlynn.psychic.api.RetrofitInstance
 import com.jlynn.psychic.api.model.RegisterRequest
 import kotlinx.android.synthetic.main.activity_signup.*
-import kotlinx.android.synthetic.main.gender_popup_layout.*
 import kotlinx.android.synthetic.main.gender_popup_layout.view.*
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -89,6 +88,8 @@ class SignupActivity : BaseActivity(), View.OnClickListener {
         input_gender_container.setEndIconTintMode(null)
 
         btn_register.setOnClickListener {
+            showProgressBar()
+
             signup(
                 email = input_email.text.toString(),
                 username = input_username.text.toString(),
@@ -131,6 +132,8 @@ class SignupActivity : BaseActivity(), View.OnClickListener {
             )
         ).enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                hideProgressBar()
+
                 Snackbar.make(
                     fields_container,
                     t.message.toString(),
@@ -139,6 +142,8 @@ class SignupActivity : BaseActivity(), View.OnClickListener {
             }
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                hideProgressBar()
+
                 if (response.code() == 201) {
                     Toast.makeText(
                         this@SignupActivity,

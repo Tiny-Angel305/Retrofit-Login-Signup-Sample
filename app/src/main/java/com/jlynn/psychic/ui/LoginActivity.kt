@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.jlynn.psychic.R
 import com.jlynn.psychic.api.ApiInterface
@@ -19,11 +18,28 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class LoginActivity : AppCompatActivity(), View.OnClickListener {
+class LoginActivity : BaseActivity(), View.OnClickListener {
+    override fun getLayoutId(): Int {
+        return R.layout.activity_login
+    }
+
+    override fun getTitleGravity(): Int {
+        return 0
+    }
+
+    override fun isMenuVisible(): Boolean {
+        return false
+    }
+
+    override fun getMenuDrawable(): Int {
+        return 0
+    }
+
+    override fun onMenuClicked() {
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
 
         tv_sign_up.setOnClickListener(this)
         tv_forgot_password.setOnClickListener(this)
@@ -44,6 +60,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.btn_login -> {
                 if (NetworkHelper().isNetworkAvailable(this)) run {
+
+                    showProgressBar()
 
                     login(
                             username = input_username.text.toString(),
@@ -69,9 +87,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                         t.message.toString(),
                         Snackbar.LENGTH_SHORT
                 ).show()
+
+                hideProgressBar()
             }
 
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                hideProgressBar()
+
                 if (response.code() == 200) {
                     Toast.makeText(this@LoginActivity, "Login success!", Toast.LENGTH_SHORT).show()
 
