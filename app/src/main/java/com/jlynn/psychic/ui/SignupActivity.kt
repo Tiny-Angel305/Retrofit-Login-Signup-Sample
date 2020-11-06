@@ -1,5 +1,6 @@
 package com.jlynn.psychic.ui
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.PopupWindow
 import android.widget.RelativeLayout
 import android.widget.Toast
+import com.ehsanmashhadi.library.view.CountryPicker
 import com.google.android.material.snackbar.Snackbar
 import com.jlynn.psychic.R
 import com.jlynn.psychic.api.ApiInterface
@@ -17,9 +19,11 @@ import com.jlynn.psychic.api.model.RegisterRequest
 import kotlinx.android.synthetic.main.activity_signup.*
 import kotlinx.android.synthetic.main.gender_popup_layout.view.*
 import okhttp3.ResponseBody
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 
 class SignupActivity : BaseActivity(), View.OnClickListener {
@@ -76,10 +80,10 @@ class SignupActivity : BaseActivity(), View.OnClickListener {
             else {
 
                 mGenderPopup.showAsDropDown(
-                    input_gender,
-                    (-250f * resources.displayMetrics.density / 3.0f).toInt(),
-                    (-30 * resources.displayMetrics.density / 3.0f).toInt(),
-                    Gravity.END
+                        input_gender,
+                        (-250f * resources.displayMetrics.density / 3.0f).toInt(),
+                        (-30 * resources.displayMetrics.density / 3.0f).toInt(),
+                        Gravity.END
                 )
 
             }
@@ -87,57 +91,75 @@ class SignupActivity : BaseActivity(), View.OnClickListener {
 
         input_gender_container.setEndIconTintMode(null)
 
+        input_dob.setOnClickListener {
+            val cal = Calendar.getInstance()
+            val y = cal.get(Calendar.YEAR)
+            val m = cal.get(Calendar.MONTH)
+            val d = cal.get(Calendar.DAY_OF_MONTH)
+            val dpd = DatePickerDialog(this, { _, year, monthOfYear, dayOfMonth ->
+                input_dob.setText("$year-" + (monthOfYear+1) +"-$dayOfMonth")
+            }, y, m, d)
+            dpd.show()
+        }
+
+        input_country.setOnClickListener {
+            val countryPicker: CountryPicker = CountryPicker.Builder(this).setCountrySelectionListener { country ->
+                input_country.setText(country.name)
+            }.showingFlag(true).showingDialCode(false).enablingSearch(true).build()
+            countryPicker.show(this)
+        }
+
         btn_register.setOnClickListener {
             showProgressBar()
 
             signup(
-                email = input_email.text.toString(),
-                username = input_username.text.toString(),
-                passwd = input_password.text.toString(),
-                passwdConfirmation = input_retype_pass.text.toString(),
-                firstName = input_first_name.text.toString(),
-                lastName = input_last_name.text.toString(),
-                gender = input_gender.text.toString(),
-                dob = input_dob.text.toString(),
-                country = input_country.text.toString()
+                    email = input_email.text.toString(),
+                    username = input_username.text.toString(),
+                    passwd = input_password.text.toString(),
+                    passwdConfirmation = input_retype_pass.text.toString(),
+                    firstName = input_first_name.text.toString(),
+                    lastName = input_last_name.text.toString(),
+                    gender = input_gender.text.toString(),
+                    dob = input_dob.text.toString(),
+                    country = input_country.text.toString()
             )
         }
     }
 
     private fun signup(
-        email: String,
-        username: String,
-        passwd: String,
-        passwdConfirmation: String,
-        firstName: String,
-        lastName: String,
-        gender: String,
-        dob: String,
-        country: String
+            email: String,
+            username: String,
+            passwd: String,
+            passwdConfirmation: String,
+            firstName: String,
+            lastName: String,
+            gender: String,
+            dob: String,
+            country: String
     ) {
         val retrofitInstance =
-            RetrofitInstance.getRetrofitInstance().create(ApiInterface::class.java)
+                RetrofitInstance.getRetrofitInstance().create(ApiInterface::class.java)
 
         retrofitInstance.registerUser(
-            RegisterRequest(
-                email,
-                username,
-                passwd,
-                passwdConfirmation,
-                firstName,
-                lastName,
-                gender,
-                dob,
-                country
-            )
+                RegisterRequest(
+                        email,
+                        username,
+                        passwd,
+                        passwdConfirmation,
+                        firstName,
+                        lastName,
+                        gender,
+                        dob,
+                        country
+                )
         ).enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 hideProgressBar()
 
                 Snackbar.make(
-                    fields_container,
-                    t.message.toString(),
-                    Snackbar.LENGTH_SHORT
+                        fields_container,
+                        t.message.toString(),
+                        Snackbar.LENGTH_SHORT
                 ).show()
             }
 
@@ -146,16 +168,30 @@ class SignupActivity : BaseActivity(), View.OnClickListener {
 
                 if (response.code() == 201) {
                     Toast.makeText(
-                        this@SignupActivity,
-                        "Registration success! Please log in with your credential.",
-                        Toast.LENGTH_SHORT
+                            this@SignupActivity,
+                            "Registration success! Please log in with your credential.",
+                            Toast.LENGTH_SHORT
                     )
-                        .show()
+                            .show()
 
                     finish()
                 } else {
-                    Snackbar.make(fields_container, "Registration failed!", Snackbar.LENGTH_SHORT)
-                        .show()
+                    try {
+                        val jObjError = JSONObject(response.errorBody()!!.string())
+                        val errors: JSONObject = jObjError.getJSONObject("errors").getJSONObject("detail")
+                        val keys: Iterator<String> = errors.keys()
+                        while (keys.hasNext()) {
+                            val valueString: String = errors.getString(keys.next())
+                            Snackbar.make(fields_container, "Registration failed!\n$valueString", Snackbar.LENGTH_SHORT)
+                                    .show()
+                            break
+                        }
+                    } catch (e: Exception) {
+                        Snackbar.make(fields_container, "Registration failed! " + e.message, Snackbar.LENGTH_SHORT)
+                                .show()
+                    }
+                    /*Snackbar.make(fields_container, "Registration failed!", Snackbar.LENGTH_SHORT)
+                            .show()*/
                 }
             }
         })
